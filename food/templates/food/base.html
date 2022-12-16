@@ -11,10 +11,16 @@
     <nav class="navbar navbar-dark bg-dark " >
         <a href="#" class="navbar-brand">FoodApp</a>
 
+
         <div>
             <a class="nav-item" href="{% url 'food:create_item' %}">Add Item</a>
             <a class="nav-item" href="#">Delete Item</a>
             <a class="nav-item" href="#"> Item</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">login</a>
+            {% endif %}
         </div>
     </nav>
     {% if messages %}
