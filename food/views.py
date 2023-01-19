@@ -5,6 +5,7 @@ from .models import Item
 from django.template import loader
 from .forms import ItemForm
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 # Create your views here.
 
 
@@ -28,14 +29,19 @@ class IndexClassView(ListView):
 def item(request):
     return HttpResponse('<h1>this is an item view</h1>')
 
-def detail(request,item_id):
-    item = Item.objects.get(pk=item_id)
-    context = {
-        'item':item,
-    }
+# def detail(request,item_id):
+#     item = Item.objects.get(pk=item_id)
+#     context = {
+#         'item':item,
+#     }
 
-    # return HttpResponse("this is item no/id: %s" % item_id)
-    return render(request,'food/detail.html',context)
+#     # return HttpResponse("this is item no/id: %s" % item_id)
+#     return render(request,'food/detail.html',context)
+
+class FoodDetail(DetailView):
+    model = Item
+    template_name = 'food/detail.html'
+
 
 def create_item(request):
     form = ItemForm(request.POST or None)
